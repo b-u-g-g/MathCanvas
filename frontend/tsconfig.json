@@ -1,3 +1,21 @@
+/*{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "composite": true
+  },
+  "files": [],
+  "include": [
+    "types"
+  ],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+*/
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -5,12 +23,8 @@
       "@/*": ["./src/*"]
     }
   },
-  "files": [],
+  
   "include": [
-    "types" 
-  ],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    "types"
   ]
 }
