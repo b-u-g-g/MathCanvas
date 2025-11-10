@@ -1,9 +1,13 @@
-import { ColorSwatch, Group } from '@mantine/core';
-import { Button } from '@/components/ui/button';
+import { ColorSwatch, Group, Button } from '@mantine/core';
+//import { Button } from '@/components/ui/button';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Draggable from 'react-draggable';
 import {SWATCHES} from '@/constants';
+import Toolbar from "./toolbar";
+
+
+
 // import {LazyBrush} from 'lazy-brush';
 
 interface GeneratedResult {
@@ -238,6 +242,13 @@ export default function Home() {
                     Run
                 </Button>
             </div>
+            <Toolbar
+  onInsertSymbol={(symbol) => {
+    console.log("Selected symbol:", symbol);
+    // You can later use this to draw the symbol on your canvas
+  }}
+/>
+
             <canvas
                 ref={canvasRef}
                 id='canvas'
@@ -248,17 +259,22 @@ export default function Home() {
                 onMouseOut={stopDrawing}
             />
 
-            {latexExpression && latexExpression.map((latex, index) => (
-                <Draggable
-                    key={index}
-                    defaultPosition={latexPosition}
-                    onStop={(_e, data) => setLatexPosition({ x: data.x, y: data.y })}
-                >
-                    <div className="absolute p-2 text-white rounded shadow-md">
-                        <div className="latex-content">{latex}</div>
-                    </div>
-                </Draggable>
-            ))}
+           {latexExpression && latexExpression.map((latex, index) => (
+  <Draggable
+    key={index}
+    defaultPosition={{
+      x: Math.min(Math.max(latexPosition.x, 0), window.innerWidth - 150), // keep inside width
+      y: Math.min(Math.max(latexPosition.y, 0), window.innerHeight - 50) // keep inside height
+    }}
+    bounds="parent" // prevents dragging outside parent container
+    onStop={(_e, data) => setLatexPosition({ x: data.x, y: data.y })}
+  >
+    <div className="absolute result-box">
+      <div className="latex-content">{latex}</div>
+    </div>
+  </Draggable>
+))}
+
         </>
     );
 }

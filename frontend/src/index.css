@@ -67,3 +67,25 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .result-box {
+    @apply max-w-[80vw] max-h-[40vh] overflow-y-auto overflow-x-hidden 
+           whitespace-normal break-words text-left p-3 
+           rounded-lg border border-border bg-secondary text-foreground shadow-lg leading-relaxed;
+  }
+
+  /* Force MathJax output to wrap instead of overflow */
+  .result-box mjx-container {
+    white-space: normal !important;
+    display: block !important;
+    overflow-x: visible !important;
+    text-align: left !important;
+    line-height: 1.6;
+  }
+
+  .result-box mjx-math {
+    display: inline !important;
+    white-space: normal !important;
+  }
+}
+
