@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Drawer, Button, Group } from "@mantine/core";
+import { Drawer, Button } from "@mantine/core";
 import { PiMathOperations } from "react-icons/pi"; // optional math icon
 
 interface SymbolToolbarProps {
